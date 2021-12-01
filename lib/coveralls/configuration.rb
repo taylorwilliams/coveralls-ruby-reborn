@@ -76,8 +76,8 @@ module Coveralls
 
       def define_service_params_for_semaphore(config)
         config[:service_name]         = 'semaphore'
-        config[:service_number]       = ENV['SEMAPHORE_BUILD_NUMBER']
-        config[:service_pull_request] = ENV['PULL_REQUEST_NUMBER']
+        config[:service_number]       = ENV['SEMAPHORE_JOB_ID']
+        config[:service_pull_request] = ENV['SEMAPHORE_GIT_PR_NUMBER']
       end
 
       def define_service_params_for_jenkins(config)
@@ -244,8 +244,8 @@ module Coveralls
 
       def semaphore_env_hash
         {
-          branch:     ENV['BRANCH_NAME'],
-          commit_sha: ENV['REVISION']
+          branch:     ENV['SEMAPHORE_GIT_PR_BRANCH'],
+          commit_sha: ENV['SEMAPHORE_GIT_PR_SHA']
         }
       end
 
